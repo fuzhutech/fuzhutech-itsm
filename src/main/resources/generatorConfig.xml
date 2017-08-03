@@ -36,22 +36,22 @@
         </javaTypeResolver>
 
         <!-- 生成实体类地址 -->
-        <javaModelGenerator targetPackage="com.fuzhutech.entity.auth" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.fuzhutech.entity.itsm" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
             <property name="rootInterface" value="com.fuzhutech.common.entity.BaseEntity"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="com.fuzhutech.mapping.auth" targetProject="src/main/java">
+        <sqlMapGenerator targetPackage="com.fuzhutech.mapping.itsm" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.fuzhutech.dao.auth" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.fuzhutech.dao.itsm" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="rootInterfaceGeneric" value="com.fuzhutech.common.dao.BaseMapper"/>
         </javaClientGenerator>
 
-        <table tableName="auth_user_role" domainObjectName="UserRole" enableCountByExample="false"
+        <table tableName="itsm_server" domainObjectName="Server" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
             <property name="useColumnIndexes" value="true"/>

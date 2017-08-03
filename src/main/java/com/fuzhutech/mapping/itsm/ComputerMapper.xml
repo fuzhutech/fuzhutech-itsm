@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuzhutech.dao.itsm.ComputerMapper">
+  <resultMap id="BaseResultMap" type="com.fuzhutech.entity.itsm.Computer">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="identifier" jdbcType="INTEGER" property="identifier" />
+    <result column="site" jdbcType="VARCHAR" property="site" />
+    <result column="kind" jdbcType="VARCHAR" property="kind" />
+    <result column="brand" jdbcType="VARCHAR" property="brand" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="serial_number" jdbcType="VARCHAR" property="serialNumber" />
+    <result column="asset_number" jdbcType="INTEGER" property="assetNumber" />
+    <result column="asset_tag" jdbcType="VARCHAR" property="assetTag" />
+    <result column="manufacturing_date" jdbcType="INTEGER" property="manufacturingDate" />
+    <result column="expiring_date" jdbcType="INTEGER" property="expiringDate" />
+    <result column="receipt_date" jdbcType="INTEGER" property="receiptDate" />
+    <result column="delivery_date" jdbcType="INTEGER" property="deliveryDate" />
+    <result column="assign_date" jdbcType="INTEGER" property="assignDate" />
+    <result column="apply_reason" jdbcType="VARCHAR" property="applyReason" />
+    <result column="user" jdbcType="VARCHAR" property="user" />
+    <result column="use_state" jdbcType="INTEGER" property="useState" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="warranty" jdbcType="VARCHAR" property="warranty" />
+    <result column="mac_address" jdbcType="VARCHAR" property="macAddress" />
+    <result column="usage_log" jdbcType="VARCHAR" property="usageLog" />
+    <result column="hardware" jdbcType="VARCHAR" property="hardware" />
+    <result column="software" jdbcType="VARCHAR" property="software" />
+    <result column="configuration" jdbcType="VARCHAR" property="configuration" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, identifier, site, kind, brand, model, serial_number, asset_number, asset_tag, 
+    manufacturing_date, expiring_date, receipt_date, delivery_date, assign_date, apply_reason, 
+    user, use_state, memo, warranty, mac_address, usage_log, hardware, software, configuration
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from itsm_computer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from itsm_computer
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fuzhutech.entity.itsm.Computer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into itsm_computer (identifier, site, kind, 
+      brand, model, serial_number, 
+      asset_number, asset_tag, manufacturing_date, 
+      expiring_date, receipt_date, delivery_date, 
+      assign_date, apply_reason, user, 
+      use_state, memo, warranty, 
+      mac_address, usage_log, hardware, 
+      software, configuration)
+    values (#{identifier,jdbcType=INTEGER}, #{site,jdbcType=VARCHAR}, #{kind,jdbcType=VARCHAR}, 
+      #{brand,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{serialNumber,jdbcType=VARCHAR}, 
+      #{assetNumber,jdbcType=INTEGER}, #{assetTag,jdbcType=VARCHAR}, #{manufacturingDate,jdbcType=INTEGER}, 
+      #{expiringDate,jdbcType=INTEGER}, #{receiptDate,jdbcType=INTEGER}, #{deliveryDate,jdbcType=INTEGER}, 
+      #{assignDate,jdbcType=INTEGER}, #{applyReason,jdbcType=VARCHAR}, #{user,jdbcType=VARCHAR}, 
+      #{useState,jdbcType=INTEGER}, #{memo,jdbcType=VARCHAR}, #{warranty,jdbcType=VARCHAR}, 
+      #{macAddress,jdbcType=VARCHAR}, #{usageLog,jdbcType=VARCHAR}, #{hardware,jdbcType=VARCHAR}, 
+      #{software,jdbcType=VARCHAR}, #{configuration,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuzhutech.entity.itsm.Computer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into itsm_computer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="identifier != null">
+        identifier,
+      </if>
+      <if test="site != null">
+        site,
+      </if>
+      <if test="kind != null">
+        kind,
+      </if>
+      <if test="brand != null">
+        brand,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="serialNumber != null">
+        serial_number,
+      </if>
+      <if test="assetNumber != null">
+        asset_number,
+      </if>
+      <if test="assetTag != null">
+        asset_tag,
+      </if>
+      <if test="manufacturingDate != null">
+        manufacturing_date,
+      </if>
+      <if test="expiringDate != null">
+        expiring_date,
+      </if>
+      <if test="receiptDate != null">
+        receipt_date,
+      </if>
+      <if test="deliveryDate != null">
+        delivery_date,
+      </if>
+      <if test="assignDate != null">
+        assign_date,
+      </if>
+      <if test="applyReason != null">
+        apply_reason,
+      </if>
+      <if test="user != null">
+        user,
+      </if>
+      <if test="useState != null">
+        use_state,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="warranty != null">
+        warranty,
+      </if>
+      <if test="macAddress != null">
+        mac_address,
+      </if>
+      <if test="usageLog != null">
+        usage_log,
+      </if>
+      <if test="hardware != null">
+        hardware,
+      </if>
+      <if test="software != null">
+        software,
+      </if>
+      <if test="configuration != null">
+        configuration,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="identifier != null">
+        #{identifier,jdbcType=INTEGER},
+      </if>
+      <if test="site != null">
+        #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null">
+        #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNumber != null">
+        #{serialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="assetNumber != null">
+        #{assetNumber,jdbcType=INTEGER},
+      </if>
+      <if test="assetTag != null">
+        #{assetTag,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturingDate != null">
+        #{manufacturingDate,jdbcType=INTEGER},
+      </if>
+      <if test="expiringDate != null">
+        #{expiringDate,jdbcType=INTEGER},
+      </if>
+      <if test="receiptDate != null">
+        #{receiptDate,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryDate != null">
+        #{deliveryDate,jdbcType=INTEGER},
+      </if>
+      <if test="assignDate != null">
+        #{assignDate,jdbcType=INTEGER},
+      </if>
+      <if test="applyReason != null">
+        #{applyReason,jdbcType=VARCHAR},
+      </if>
+      <if test="user != null">
+        #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="useState != null">
+        #{useState,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="warranty != null">
+        #{warranty,jdbcType=VARCHAR},
+      </if>
+      <if test="macAddress != null">
+        #{macAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="usageLog != null">
+        #{usageLog,jdbcType=VARCHAR},
+      </if>
+      <if test="hardware != null">
+        #{hardware,jdbcType=VARCHAR},
+      </if>
+      <if test="software != null">
+        #{software,jdbcType=VARCHAR},
+      </if>
+      <if test="configuration != null">
+        #{configuration,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuzhutech.entity.itsm.Computer">
+    update itsm_computer
+    <set>
+      <if test="identifier != null">
+        identifier = #{identifier,jdbcType=INTEGER},
+      </if>
+      <if test="site != null">
+        site = #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null">
+        kind = #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNumber != null">
+        serial_number = #{serialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="assetNumber != null">
+        asset_number = #{assetNumber,jdbcType=INTEGER},
+      </if>
+      <if test="assetTag != null">
+        asset_tag = #{assetTag,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturingDate != null">
+        manufacturing_date = #{manufacturingDate,jdbcType=INTEGER},
+      </if>
+      <if test="expiringDate != null">
+        expiring_date = #{expiringDate,jdbcType=INTEGER},
+      </if>
+      <if test="receiptDate != null">
+        receipt_date = #{receiptDate,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryDate != null">
+        delivery_date = #{deliveryDate,jdbcType=INTEGER},
+      </if>
+      <if test="assignDate != null">
+        assign_date = #{assignDate,jdbcType=INTEGER},
+      </if>
+      <if test="applyReason != null">
+        apply_reason = #{applyReason,jdbcType=VARCHAR},
+      </if>
+      <if test="user != null">
+        user = #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="useState != null">
+        use_state = #{useState,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="warranty != null">
+        warranty = #{warranty,jdbcType=VARCHAR},
+      </if>
+      <if test="macAddress != null">
+        mac_address = #{macAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="usageLog != null">
+        usage_log = #{usageLog,jdbcType=VARCHAR},
+      </if>
+      <if test="hardware != null">
+        hardware = #{hardware,jdbcType=VARCHAR},
+      </if>
+      <if test="software != null">
+        software = #{software,jdbcType=VARCHAR},
+      </if>
+      <if test="configuration != null">
+        configuration = #{configuration,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuzhutech.entity.itsm.Computer">
+    update itsm_computer
+    set identifier = #{identifier,jdbcType=INTEGER},
+      site = #{site,jdbcType=VARCHAR},
+      kind = #{kind,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      serial_number = #{serialNumber,jdbcType=VARCHAR},
+      asset_number = #{assetNumber,jdbcType=INTEGER},
+      asset_tag = #{assetTag,jdbcType=VARCHAR},
+      manufacturing_date = #{manufacturingDate,jdbcType=INTEGER},
+      expiring_date = #{expiringDate,jdbcType=INTEGER},
+      receipt_date = #{receiptDate,jdbcType=INTEGER},
+      delivery_date = #{deliveryDate,jdbcType=INTEGER},
+      assign_date = #{assignDate,jdbcType=INTEGER},
+      apply_reason = #{applyReason,jdbcType=VARCHAR},
+      user = #{user,jdbcType=VARCHAR},
+      use_state = #{useState,jdbcType=INTEGER},
+      memo = #{memo,jdbcType=VARCHAR},
+      warranty = #{warranty,jdbcType=VARCHAR},
+      mac_address = #{macAddress,jdbcType=VARCHAR},
+      usage_log = #{usageLog,jdbcType=VARCHAR},
+      hardware = #{hardware,jdbcType=VARCHAR},
+      software = #{software,jdbcType=VARCHAR},
+      configuration = #{configuration,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, identifier, site, kind, brand, model, serial_number, asset_number, asset_tag, 
+    manufacturing_date, expiring_date, receipt_date, delivery_date, assign_date, apply_reason, 
+    user, use_state, memo, warranty, mac_address, usage_log, hardware, software, configuration
+    from itsm_computer
+  </select>
+  <select id="selectByPageInfo" parameterType="PageInfo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from itsm_computer inner join (select id from itsm_computer order by id asc limit #{offset}, #{rows}) t2 using(id)
+  </select>
+  <select id="countByPageInfo" parameterType="PageInfo" resultType="java.lang.Integer">
+    select count(id) count from itsm_computer
+  </select>
+  <select id="selectByWhere" parameterType="com.fuzhutech.entity.itsm.Computer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from itsm_computer
+    <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER} and 
+      </if>
+      <if test="identifier != null">
+        identifier = #{identifier,jdbcType=INTEGER} and 
+      </if>
+      <if test="site != null">
+        site = #{site,jdbcType=VARCHAR} and 
+      </if>
+      <if test="kind != null">
+        kind = #{kind,jdbcType=VARCHAR} and 
+      </if>
+      <if test="brand != null">
+        brand = #{brand,jdbcType=VARCHAR} and 
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR} and 
+      </if>
+      <if test="serialNumber != null">
+        serial_number = #{serialNumber,jdbcType=VARCHAR} and 
+      </if>
+      <if test="assetNumber != null">
+        asset_number = #{assetNumber,jdbcType=INTEGER} and 
+      </if>
+      <if test="assetTag != null">
+        asset_tag = #{assetTag,jdbcType=VARCHAR} and 
+      </if>
+      <if test="manufacturingDate != null">
+        manufacturing_date = #{manufacturingDate,jdbcType=INTEGER} and 
+      </if>
+      <if test="expiringDate != null">
+        expiring_date = #{expiringDate,jdbcType=INTEGER} and 
+      </if>
+      <if test="receiptDate != null">
+        receipt_date = #{receiptDate,jdbcType=INTEGER} and 
+      </if>
+      <if test="deliveryDate != null">
+        delivery_date = #{deliveryDate,jdbcType=INTEGER} and 
+      </if>
+      <if test="assignDate != null">
+        assign_date = #{assignDate,jdbcType=INTEGER} and 
+      </if>
+      <if test="applyReason != null">
+        apply_reason = #{applyReason,jdbcType=VARCHAR} and 
+      </if>
+      <if test="user != null">
+        user = #{user,jdbcType=VARCHAR} and 
+      </if>
+      <if test="useState != null">
+        use_state = #{useState,jdbcType=INTEGER} and 
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR} and 
+      </if>
+      <if test="warranty != null">
+        warranty = #{warranty,jdbcType=VARCHAR} and 
+      </if>
+      <if test="macAddress != null">
+        mac_address = #{macAddress,jdbcType=VARCHAR} and 
+      </if>
+      <if test="usageLog != null">
+        usage_log = #{usageLog,jdbcType=VARCHAR} and 
+      </if>
+      <if test="hardware != null">
+        hardware = #{hardware,jdbcType=VARCHAR} and 
+      </if>
+      <if test="software != null">
+        software = #{software,jdbcType=VARCHAR} and 
+      </if>
+      <if test="configuration != null">
+        configuration = #{configuration,jdbcType=VARCHAR} and 
+      </if>
+    </trim>
+  </select>
+  <delete id="deleteByWhere" parameterType="com.fuzhutech.entity.itsm.Computer">
+    delete from itsm_computer
+    <where>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER} and 
+      </if>
+      <if test="identifier != null">
+        identifier = #{identifier,jdbcType=INTEGER} and 
+      </if>
+      <if test="site != null">
+        site = #{site,jdbcType=VARCHAR} and 
+      </if>
+      <if test="kind != null">
+        kind = #{kind,jdbcType=VARCHAR} and 
+      </if>
+      <if test="brand != null">
+        brand = #{brand,jdbcType=VARCHAR} and 
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR} and 
+      </if>
+      <if test="serialNumber != null">
+        serial_number = #{serialNumber,jdbcType=VARCHAR} and 
+      </if>
+      <if test="assetNumber != null">
+        asset_number = #{assetNumber,jdbcType=INTEGER} and 
+      </if>
+      <if test="assetTag != null">
+        asset_tag = #{assetTag,jdbcType=VARCHAR} and 
+      </if>
+      <if test="manufacturingDate != null">
+        manufacturing_date = #{manufacturingDate,jdbcType=INTEGER} and 
+      </if>
+      <if test="expiringDate != null">
+        expiring_date = #{expiringDate,jdbcType=INTEGER} and 
+      </if>
+      <if test="receiptDate != null">
+        receipt_date = #{receiptDate,jdbcType=INTEGER} and 
+      </if>
+      <if test="deliveryDate != null">
+        delivery_date = #{deliveryDate,jdbcType=INTEGER} and 
+      </if>
+      <if test="assignDate != null">
+        assign_date = #{assignDate,jdbcType=INTEGER} and 
+      </if>
+      <if test="applyReason != null">
+        apply_reason = #{applyReason,jdbcType=VARCHAR} and 
+      </if>
+      <if test="user != null">
+        user = #{user,jdbcType=VARCHAR} and 
+      </if>
+      <if test="useState != null">
+        use_state = #{useState,jdbcType=INTEGER} and 
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR} and 
+      </if>
+      <if test="warranty != null">
+        warranty = #{warranty,jdbcType=VARCHAR} and 
+      </if>
+      <if test="macAddress != null">
+        mac_address = #{macAddress,jdbcType=VARCHAR} and 
+      </if>
+      <if test="usageLog != null">
+        usage_log = #{usageLog,jdbcType=VARCHAR} and 
+      </if>
+      <if test="hardware != null">
+        hardware = #{hardware,jdbcType=VARCHAR} and 
+      </if>
+      <if test="software != null">
+        software = #{software,jdbcType=VARCHAR} and 
+      </if>
+      <if test="configuration != null">
+        configuration = #{configuration,jdbcType=VARCHAR} and 
+      </if>
+    </where>
+  </delete>
+</mapper>

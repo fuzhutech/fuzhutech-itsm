@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuzhutech.dao.itsm.ComputerMaintainMapper">
+  <resultMap id="BaseResultMap" type="com.fuzhutech.entity.itsm.ComputerMaintain">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="maintain_date" jdbcType="INTEGER" property="maintainDate" />
+    <result column="maintainer" jdbcType="VARCHAR" property="maintainer" />
+    <result column="computer_id" jdbcType="INTEGER" property="computerId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, maintain_date, maintainer, computer_id, user_id, user_name, memo, create_time, 
+    modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from itsm_computer_maintain
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from itsm_computer_maintain
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fuzhutech.entity.itsm.ComputerMaintain">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into itsm_computer_maintain (maintain_date, maintainer, computer_id, 
+      user_id, user_name, memo, 
+      create_time, modify_time)
+    values (#{maintainDate,jdbcType=INTEGER}, #{maintainer,jdbcType=VARCHAR}, #{computerId,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuzhutech.entity.itsm.ComputerMaintain">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into itsm_computer_maintain
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="maintainDate != null">
+        maintain_date,
+      </if>
+      <if test="maintainer != null">
+        maintainer,
+      </if>
+      <if test="computerId != null">
+        computer_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="maintainDate != null">
+        #{maintainDate,jdbcType=INTEGER},
+      </if>
+      <if test="maintainer != null">
+        #{maintainer,jdbcType=VARCHAR},
+      </if>
+      <if test="computerId != null">
+        #{computerId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuzhutech.entity.itsm.ComputerMaintain">
+    update itsm_computer_maintain
+    <set>
+      <if test="maintainDate != null">
+        maintain_date = #{maintainDate,jdbcType=INTEGER},
+      </if>
+      <if test="maintainer != null">
+        maintainer = #{maintainer,jdbcType=VARCHAR},
+      </if>
+      <if test="computerId != null">
+        computer_id = #{computerId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuzhutech.entity.itsm.ComputerMaintain">
+    update itsm_computer_maintain
+    set maintain_date = #{maintainDate,jdbcType=INTEGER},
+      maintainer = #{maintainer,jdbcType=VARCHAR},
+      computer_id = #{computerId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, maintain_date, maintainer, computer_id, user_id, user_name, memo, create_time, 
+    modify_time
+    from itsm_computer_maintain
+  </select>
+  <select id="selectByPageInfo" parameterType="PageInfo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from itsm_computer_maintain inner join (select id from itsm_computer_maintain order by id asc limit #{offset}, #{rows}) t2 using(id)
+  </select>
+  <select id="countByPageInfo" parameterType="PageInfo" resultType="java.lang.Integer">
+    select count(id) count from itsm_computer_maintain
+  </select>
+  <select id="selectByWhere" parameterType="com.fuzhutech.entity.itsm.ComputerMaintain" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from itsm_computer_maintain
+    <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER} and 
+      </if>
+      <if test="maintainDate != null">
+        maintain_date = #{maintainDate,jdbcType=INTEGER} and 
+      </if>
+      <if test="maintainer != null">
+        maintainer = #{maintainer,jdbcType=VARCHAR} and 
+      </if>
+      <if test="computerId != null">
+        computer_id = #{computerId,jdbcType=INTEGER} and 
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER} and 
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR} and 
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR} and 
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP} and 
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP} and 
+      </if>
+    </trim>
+  </select>
+  <delete id="deleteByWhere" parameterType="com.fuzhutech.entity.itsm.ComputerMaintain">
+    delete from itsm_computer_maintain
+    <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER} and 
+      </if>
+      <if test="maintainDate != null">
+        maintain_date = #{maintainDate,jdbcType=INTEGER} and 
+      </if>
+      <if test="maintainer != null">
+        maintainer = #{maintainer,jdbcType=VARCHAR} and 
+      </if>
+      <if test="computerId != null">
+        computer_id = #{computerId,jdbcType=INTEGER} and 
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER} and 
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR} and 
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR} and 
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP} and 
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP} and 
+      </if>
+    </trim>
+  </delete>
+</mapper>
